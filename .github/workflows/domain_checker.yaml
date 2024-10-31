@@ -1,0 +1,48 @@
+name: Check Domain Registry & SSL
+
+on:
+  schedule:
+    - cron:  '30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check_registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: Check Registry
+
+    steps:
+      - name: Check domain registry expire date
+        id: check-domain
+        uses: fenbi/action-check-domain@v3
+        with:
+          urls: |-
+            https://douban.com
+            https://google.com
+            https://x.com
+          check_action: registry
+          token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: liluo
+
+  check_ssl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: Check SSL
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check domain SSL expire date
+        id: check-domain
+        uses: fenbi/action-check-domain@v3
+        with:
+          urls: |-
+            https://douban.com
+            https://google.com
+            https://x.com
+          check_action: ssl
+          token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: liluo
+
