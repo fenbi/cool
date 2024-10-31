@@ -20,10 +20,11 @@ jobs:
         id: check-domain
         uses: fenbi/action-check-domain@v3
         with:
-          urls: |-
+          urls: |
             https://douban.com
             https://google.com
             https://x.com
+          minimum_left_days: 10000
           check_action: registry
           token: ${{ secrets.GITHUB_TOKEN }}
           assignees: liluo
@@ -38,11 +39,12 @@ jobs:
         id: check-domain
         uses: fenbi/action-check-domain@v3
         with:
-          urls: |-
+          urls: |
             https://douban.com
             https://google.com
             https://x.com
           check_action: ssl
+          minimum_left_days: 10000
           token: ${{ secrets.GITHUB_TOKEN }}
           assignees: liluo
 
