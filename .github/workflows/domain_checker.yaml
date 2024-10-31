@@ -21,9 +21,9 @@ jobs:
         uses: fenbi/action-check-domain@v6
         with:
           urls: |
-            https://douban.com
-            https://google.com
-            https://x.com
+                 https://douban.com
+                 https://google.com
+                 https://x.com
           minimum_left_days: 10000
           check_action: registry
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,9 +40,9 @@ jobs:
         uses: fenbi/action-check-domain@v6
         with:
           urls: |
-            https://douban.com
-            https://google.com
-            https://x.com
+                 https://douban.com
+                 https://google.com
+                 https://x.com
           check_action: ssl
           minimum_left_days: 10000
           token: ${{ secrets.GITHUB_TOKEN }}
