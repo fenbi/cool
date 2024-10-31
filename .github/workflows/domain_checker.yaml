@@ -18,13 +18,11 @@ jobs:
     steps:
       - name: Check domain registry expire date
         id: check-domain
-        uses: fenbi/action-check-domain@v7
+        uses: fenbi/action-check-domain@v8
         with:
-          urls: https://douban.com
-          minimum_left_days: 10000
+          url: 123
           check_action: registry
           token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: liluo
 
   check_ssl:
     runs-on: ubuntu-latest
@@ -34,11 +32,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check domain SSL expire date
         id: check-domain
-        uses: fenbi/action-check-domain@v7
+        uses: fenbi/action-check-domain@v8
         with:
-          urls: https://douban.com
+          url: 123
           check_action: ssl
-          minimum_left_days: 10000
           token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: liluo
-
