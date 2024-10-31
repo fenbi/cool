@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Check domain registry expire date
         id: check-domain
-        uses: fenbi/action-check-domain@v8
+        uses: fenbi/action-check-domain@debug
         with:
           url: 123
           check_action: registry
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check domain SSL expire date
         id: check-domain
-        uses: fenbi/action-check-domain@v8
+        uses: fenbi/action-check-domain@debug
         with:
           url: 123
           check_action: ssl
