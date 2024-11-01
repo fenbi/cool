@@ -25,5 +25,5 @@ jobs:
             x.com
           check-type: registry
           warning-days: 100
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: 999
           assignee: liluo
