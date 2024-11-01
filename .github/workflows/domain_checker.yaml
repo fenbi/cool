@@ -18,22 +18,12 @@ jobs:
     steps:
       - name: Check domain registry expire date
         id: check-domain
-        uses: fenbi/action-check-domain@debug
+        uses: cuteio/domain-monitor@main
         with:
-          url: 123
-          check_action: registry
+          domains: |
+            douban.com
+            x.com
+          check-type: registry
+          warning-days: 100
           token: ${{ secrets.GITHUB_TOKEN }}
-
-  check_ssl:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    name: Check SSL
-    steps:
-      - uses: actions/checkout@v3
-      - name: Check domain SSL expire date
-        id: check-domain
-        uses: fenbi/action-check-domain@debug
-        with:
-          url: 123
-          check_action: ssl
-          token: ${{ secrets.GITHUB_TOKEN }}
+          assignee: liluo
