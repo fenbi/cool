@@ -18,31 +18,35 @@ jobs:
     steps:
       - name: Check domain registry expire date
         id: check-domain
-        uses: fenbi/action-check-domain@v3
+        uses: cuteio/domain-monitor@main
         with:
-          urls: |-
-            https://douban.com
-            https://google.com
-            https://x.com
-          check_action: registry
-          token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: liluo
+          domains: |
+            douban.com
+            x.com
+            ccluster.net
+          check-type: registry
+          warning-days: 800
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          assignee: liluo
+
 
   check_ssl:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    name: Check SSL
+    name: Check ssl
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Check domain SSL expire date
+      - name: Check domain registry expire date
         id: check-domain
-        uses: fenbi/action-check-domain@v3
+        uses: cuteio/domain-monitor@main
         with:
-          urls: |-
-            https://douban.com
-            https://google.com
-            https://x.com
-          check_action: ssl
-          token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: liluo
+          domains: |
+            douban.com
+            x.com
+            zero-homers.ccluster.net
+          check-type: ssl
+          warning-days: 900
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          assignee: liluo
+
 

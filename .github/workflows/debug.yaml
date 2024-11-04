@@ -1,0 +1,30 @@
+name: Debug
+
+on:
+  schedule:
+    - cron:  '30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check_registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: Debug.
+
+    steps:
+      - name: test
+        id: test
+        uses: zuoxia/demo@main
+        with:
+          who-to-greet: 'liluo'
+          domains: |
+            douban.com
+            x.com
+          check-type: registry
+          warning-days: 100
+          github-token: 999
+          assignee: liluo
