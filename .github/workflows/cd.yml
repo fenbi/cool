@@ -1,8 +1,9 @@
 name: test
 
 on:
-  label:
-    types: [rebase]
+  issues:
+    types:
+      - labeled
 
 jobs:
   test_rebase:
