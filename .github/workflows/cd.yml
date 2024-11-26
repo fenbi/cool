@@ -1,0 +1,34 @@
+name: test
+
+on:
+  label:
+    types: [rebase]
+
+jobs:
+  test_rebase:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: sed imageUpdate Kubernetes resources
+      run: |
+        echo "\naaaaaa" >> test.md
+        sleep 10
+    - name: Commit files
+      env:
+       repo: ${{ github.event.client_payload.repo }}
+       tag: ${{ github.event.client_payload.image_tag }}
+      run: |
+        git config --local user.email "caiyun-ops@github.com"
+        git config --local user.name "caiyun-ops"
+        git commit -am " ${repo##*/} update image tag to $tag "
+    - name: Push changes
+      uses: HatePM/github-push-action@rebase
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+        push_fails_notify_script: |
+          curl -X POST 'https://open.feishu.cn/open-apis/bot/v2/hook/f4ae21d6-2efe-49f2-b482-38bec59821a7' \
+               -H 'Content-Type: application/json' \
+               -d '{"msg_type": "text", "content": {"text": "Workflow push fails: https://github.com/fenbi/cool/actions/runs/${{ github.run_id }}"}}'
